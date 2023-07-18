@@ -1,0 +1,3 @@
+header color = #00A884
+background-color: #F0F2F5
+text color = #30957F
