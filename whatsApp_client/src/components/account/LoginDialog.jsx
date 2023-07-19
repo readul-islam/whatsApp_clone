@@ -151,10 +151,10 @@ const LoginDialog = () => {
   const { userInfo, setUserInfo } = useContext(AccountContext)
 
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth)
-  console.log(error)
-  if (user & !error) {
-    setUserInfo(user)
-  }
+  // console.log(error, userInfo)
+  // if (user & !error) {
+  //   setUserInfo()
+  // }
 
   return (
     <CustomDialog

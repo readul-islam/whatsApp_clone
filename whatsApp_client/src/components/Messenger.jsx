@@ -22,28 +22,27 @@ const Header = styled(AppBar)`
 
 const Messenger = () => {
   const { userInfo } = useContext(AccountContext)
+  console.log(userInfo)
   return (
-    
-      <>
-        {userInfo ? (
-          <>
-            <Header>
-              <Toolbar></Toolbar>
-            </Header>
-            <ChatDialog />
-          </>
-        ) : (
-          <>
+    <>
+      {userInfo ? (
+        <>
+          <Header>
+            <Toolbar></Toolbar>
+          </Header>
+          <ChatDialog />
+        </>
+      ) : (
+        <>
           <Container>
             <AuthPageHeader>
               <Toolbar></Toolbar>
             </AuthPageHeader>
             <LoginDialog />
-            </Container>
-          </>
-        )}
-      </>
-  
+          </Container>
+        </>
+      )}
+    </>
   )
 }
 
