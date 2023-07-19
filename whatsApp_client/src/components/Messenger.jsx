@@ -1,32 +1,27 @@
-import { AppBar, Box, Toolbar, styled } from "@mui/material";
-import React from "react";
-import LoginDialog from "./account/LoginDialog";
-
+import { AppBar, Box, Toolbar, styled } from '@mui/material'
+import React from 'react'
+import LoginDialog from './account/LoginDialog'
 
 const Container = styled(Box)`
-height:100vh;
-background:#F0F2F5
+  height: 100vh;
+  background: #f0f2f5;
 `
 
 const Header = styled(AppBar)`
-height:180px;
-background: #00A884;
-box-shadow: none;
-
+  height: 180px;
+  background: #00a884;
+  box-shadow: none;
 `
-
 
 const Messenger = () => {
   return (
     <Container>
       <Header>
-        <Toolbar>
-            
-        </Toolbar>
+        <Toolbar></Toolbar>
       </Header>
-      <LoginDialog/>
+      <LoginDialog />
     </Container>
-  );
-};
+  )
+}
 
-export default Messenger;
+export default Messenger

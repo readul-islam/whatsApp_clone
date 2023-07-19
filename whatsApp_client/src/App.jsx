@@ -1,12 +1,9 @@
-
 import Messenger from './components/Messenger'
 
 function App() {
-
-
   return (
     <>
-     <Messenger/>
+      <Messenger />
     </>
   )
 }
