@@ -7,12 +7,13 @@ import {
   Typography,
   styled,
 } from '@mui/material'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import { FcGoogle } from 'react-icons/fc'
 // image
 import QRCode from '../../assets/qrcode.jpg'
 import auth from '../../firebase'
+import { AccountContext } from '../../context/AccountProvider'
 
 const dialogStyle = {
   height: '96%',
@@ -147,7 +148,13 @@ const CustomGoogleButton = styled(Box)(({ theme }) => ({
 }))
 
 const LoginDialog = () => {
+  const { userInfo, setUserInfo } = useContext(AccountContext)
+
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth)
+  console.log(error)
+  if (user & !error) {
+    setUserInfo(user)
+  }
 
   return (
     <CustomDialog
