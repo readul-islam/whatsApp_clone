@@ -29,11 +29,11 @@ const BoxWrapper = styled(Box)(({ theme }) => ({
 }))
 
 const DescriptionWrapper = styled(Box)(({ theme }) => ({
-padding:'15px 20px 28px 30px',
-"& > p":{
-    fontSize:'13px',
-    color:'#8696a0'
-}
+  padding: '15px 20px 28px 30px',
+  '& > p': {
+    fontSize: '13px',
+    color: '#8696a0',
+  },
 }))
 
 const Profile = () => {
@@ -52,10 +52,13 @@ const Profile = () => {
         <Typography>developer.readul@gmail.com</Typography>
       </BoxWrapper>
       <DescriptionWrapper>
-        <Typography>This is not your username or pin. This name will be visible to your whatsApp contacts</Typography>
+        <Typography>
+          This is not your username or pin. This name will be visible to your
+          whatsApp contacts
+        </Typography>
       </DescriptionWrapper>
       <BoxWrapper>
-      <Typography>About</Typography>
+        <Typography>About</Typography>
         <Typography>Software Engineer</Typography>
       </BoxWrapper>
     </>

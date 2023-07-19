@@ -9,23 +9,23 @@ const MenuOption = styled(MenuItem)(({ theme }) => ({
   color: '#4A4A4A',
 }))
 
-const HeaderOptionMenu = () => {
-  const [open, setOpen] = useState(null)
+const HeaderOptionMenu = ({ setOpen }) => {
+  const [openOptionMenu, setOpenOptionMenu] = useState(null)
 
   const ClickHandler = (e) => {
-    setOpen(e.currentTarget)
+    setOpenOptionMenu(e.currentTarget)
   }
 
   const handleClose = () => {
-    setOpen(null)
+    setOpenOptionMenu(null)
   }
 
   return (
     <>
       <MoreVertIcon onClick={ClickHandler} sx={iconStyle} />
       <Menu
-        anchorEl={open}
-        open={open}
+        anchorEl={openOptionMenu}
+        open={openOptionMenu}
         onClose={handleClose}
         keepMounted
         getContentAnchorE1={null}
@@ -38,7 +38,14 @@ const HeaderOptionMenu = () => {
           horizontal: 'right',
         }}
       >
-        <MenuOption onClick={handleClose}>Profile</MenuOption>
+        <MenuOption
+          onClick={() => {
+            handleClose()
+            setOpen(true)
+          }}
+        >
+          Profile
+        </MenuOption>
         <MenuOption onClick={handleClose}>My account</MenuOption>
         <MenuOption onClick={handleClose}>Logout</MenuOption>
       </Menu>

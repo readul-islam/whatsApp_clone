@@ -35,7 +35,7 @@ const MenuContainer = styled(Box)(({ theme }) => ({
 }))
 
 const ChatContainer = styled(Box)(({ theme }) => ({
-  width: '73%',
+  width: '75%',
   minWidth: '300px',
   hight: '100%',
   borderLeft: '1px solid rgba(0,0,0,0.14) ',

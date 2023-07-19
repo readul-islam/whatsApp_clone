@@ -28,7 +28,7 @@ const Header = styled(Box)(({ theme }) => ({
   },
 }))
 
-const Component =styled(Box)(({ theme }) => ({
+const Component = styled(Box)(({ theme }) => ({
   backgroundColor: '#ededed',
   height: '85%',
 }))

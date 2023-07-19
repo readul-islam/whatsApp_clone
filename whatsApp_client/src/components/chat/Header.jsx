@@ -32,26 +32,26 @@ export const iconStyle = {
 }
 
 const Header = () => {
-    const [open, setOpen] = useState(false)
-    const toggleHandler = () =>{
-        setOpen(true)
-    }
+  const [open, setOpen] = useState(false)
+  const toggleHandler = () => {
+    setOpen(true)
+  }
   return (
     <>
-    <HeaderContainer>
-      <Avatar
-      onClick={toggleHandler}
-        src='https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg'
-        alt='profile image'
-      />
+      <HeaderContainer>
+        <Avatar
+          onClick={toggleHandler}
+          src='https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg'
+          alt='profile image'
+        />
 
-      <IconBox>
-        <HistoryToggleOffIcon sx={iconStyle} />
-        <ChatIcon sx={iconStyle} />
-        <HeaderOptionMenu />
-      </IconBox>
-    <InfoDrawer open={open} setOpen={setOpen}/>
-    </HeaderContainer>
+        <IconBox>
+          <HistoryToggleOffIcon sx={iconStyle} />
+          <ChatIcon sx={iconStyle} />
+          <HeaderOptionMenu setOpen={setOpen} />
+        </IconBox>
+        <InfoDrawer open={open} setOpen={setOpen} />
+      </HeaderContainer>
     </>
   )
 }
