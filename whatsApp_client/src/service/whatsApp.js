@@ -1,8 +1,10 @@
 // instance
 import axios from 'axios'
 
+const BaseUrl = 'https://whatsapp-d36t.onrender.com/api/v1/'
+
 const whatsApp = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: BaseUrl,
   timeout: 1000,
 })
 

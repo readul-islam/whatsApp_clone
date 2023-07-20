@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react'
 export const AccountContext = createContext(null)
 
 const AccountProvider = ({ children }) => {
-  const [userInfo, setUserInfo] = useState({ userInfo: 'rrr' })
+  const [userInfo, setUserInfo] = useState({})
   return (
     <AccountContext.Provider
       value={{

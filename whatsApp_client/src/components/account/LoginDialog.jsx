@@ -7,13 +7,14 @@ import {
   Typography,
   styled,
 } from '@mui/material'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import { FcGoogle } from 'react-icons/fc'
 // image
 import QRCode from '../../assets/qrcode.jpg'
-import auth from '../../firebase'
 import { AccountContext } from '../../context/AccountProvider'
+import auth from '../../firebase'
+import AuthForm from '../auth/AuthForm'
 
 const dialogStyle = {
   height: '96%',
@@ -149,6 +150,7 @@ const CustomGoogleButton = styled(Box)(({ theme }) => ({
 
 const LoginDialog = () => {
   const { userInfo, setUserInfo } = useContext(AccountContext)
+  const [signUp, setSignUP] = useState(false)
 
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth)
   // console.log(error, userInfo)
@@ -162,36 +164,57 @@ const LoginDialog = () => {
       PaperProps={{ sx: dialogStyle }}
       open={true}
     >
-      <Container>
-        <HeaderContainer>
-          <Box>
-            <Title> Use WhatsApp on your computer</Title>
-            <StyledList>
-              <ListItem>1. Open WhatsApp on your phone</ListItem>
-              <ListItem>
-                2. Tap Menu : or Setting 🔯 and select Linked Device
-              </ListItem>
-              <ListItem>3. Link a device</ListItem>
-              <ListItem>
-                4. Point your phone to this screen to capture the QR code
-              </ListItem>
-            </StyledList>
-          </Box>
-          <Box className='qr_container'>
-            <Box sx={{ position: 'relative' }}>
-              <QrStyle src={QRCode} alt='' />
+      {signUp ? (
+        <>
+        <AuthForm signUp={signUp} setSignUP={setSignUP}/>
+        </>
+      ) : (
+        <>
+          <Container>
+            <HeaderContainer>
+              <Box>
+                <Title> Use WhatsApp on your computer</Title>
+                <StyledList>
+                  <ListItem>1. Open WhatsApp on your phone</ListItem>
+                  <ListItem>
+                    2. Tap Menu : or Setting 🔯 and select Linked Device
+                  </ListItem>
+                  <ListItem>3. Link a device</ListItem>
+                  <ListItem>
+                    4. Point your phone to this screen to capture the QR code
+                  </ListItem>
+                </StyledList>
+              </Box>
+              <Box className='qr_container'>
+                <Box sx={{ position: 'relative' }}>
+                  <QrStyle src={QRCode} alt='' />
 
-              <CustomGoogleButton onClick={() => signInWithGoogle()}>
-                <FcGoogle size={25} />
-                <Typography>SignIn With Google</Typography>
-              </CustomGoogleButton>
-            </Box>
-          </Box>
-        </HeaderContainer>
+                  <CustomGoogleButton onClick={() => signInWithGoogle()}>
+                    <FcGoogle size={25} />
+                    <Typography>SignIn With Google</Typography>
+                  </CustomGoogleButton>
+                </Box>
+              </Box>
+            </HeaderContainer>
 
-        <Divider sx={{ marginTop: 3 }} light />
-        <LinkedText>Link with phone number</LinkedText>
-      </Container>
+            <Divider sx={{ marginTop: 3 }} light />
+            <LinkedText>
+              New to WhatsApp?{' '}
+              <Box
+                onClick={() => setSignUP(true)}
+                style={{
+                  color: '#006400',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                }}
+                component={'span'}
+              >
+                Sign Up
+              </Box>{' '}
+            </LinkedText>
+          </Container>
+        </>
+      )}
     </CustomDialog>
   )
 }
