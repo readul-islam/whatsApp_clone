@@ -1,7 +1,8 @@
 import { Box, Dialog, styled } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import Menu from './Menu'
-import EmptyChat from './EmptyChat'
+import EmptyChat from './chat/EmptyChat'
+import ChatBox from './chat/ChatBox'
 
 const CustomDialog = styled(Dialog)(({ theme }) => ({
   '& 	.MuiDialog-paper': {
@@ -42,14 +43,16 @@ const ChatContainer = styled(Box)(({ theme }) => ({
 }))
 
 const ChatDialog = () => {
+  const [selectedUser, setSelectedUser] = useState(null)
+  console.log(selectedUser)
   return (
     <CustomDialog maxWidth={'md'} hideBackdrop open={true}>
       <Container>
         <MenuContainer>
-          <Menu />
+          <Menu setSelectedUser={setSelectedUser} />
         </MenuContainer>
         <ChatContainer>
-          <EmptyChat />
+          {selectedUser ? <ChatBox /> : <EmptyChat />}
         </ChatContainer>
       </Container>
     </CustomDialog>

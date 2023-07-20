@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Box, styled, Typography, Divider } from '@mui/material'
-import emptyChatImage from '../../assets/empty_banner.jpg'
+import { Box, Divider, Typography, styled } from '@mui/material'
+import emptyChatImage from '../../../assets/empty_banner.jpg'
 
 const Component = styled(Box)`
   background: #f8f9fa;
