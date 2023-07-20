@@ -57,13 +57,13 @@ const CustomCameraBox = styled(Box)(({ theme }) => ({
   position: 'absolute',
   background: '#D3D3D3',
   opacity: 0.8,
-  display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   cursor: 'pointer',
   display: 'none',
   transition: '5s ease',
+
 }))
 
 const CustomLabel = styled('label')(({ theme }) => ({
