@@ -1,8 +1,8 @@
-import ChatIcon from '@mui/icons-material/Chat'
-import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff'
+import CallIcon from '@mui/icons-material/Call'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { Box, Typography, styled, Avatar, Badge } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
+import VideocamIcon from '@mui/icons-material/Videocam'
+import { Avatar, Badge, Box, Typography, styled } from '@mui/material'
 import React from 'react'
 
 const HeaderContainer = styled(Box)(({ theme }) => ({
@@ -124,6 +124,9 @@ const ChatHeader = () => {
           </Box>
         </AvatarContainer>
         <IconBox>
+          <CallIcon sx={iconStyle} />
+
+          <VideocamIcon sx={iconStyle} />
           <SearchIcon sx={iconStyle} />
 
           <MoreVertIcon sx={iconStyle} />

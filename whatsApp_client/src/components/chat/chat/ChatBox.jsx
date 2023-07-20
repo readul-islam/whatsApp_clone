@@ -1,11 +1,14 @@
 import React from 'react'
 import ChatHeader from './ChatHeader'
+import Messages from './Messages'
+import { Box } from '@mui/material'
 
 const ChatBox = () => {
   return (
-    <>
-      <ChatHeader></ChatHeader>
-    </>
+    <Box style={{height:'75%'}}>
+      <ChatHeader/>
+      <Messages/>
+    </Box>
   )
 }
 
