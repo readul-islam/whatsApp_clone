@@ -21,6 +21,8 @@ import { userLogin, userRegister } from '../../service/api'
 import { toast } from 'react-hot-toast'
 import { status } from '../../service/whatsApp'
 import { showToastByStatus } from '../../utils/hooks'
+import { useCookies } from 'react-cookie'
+import { isEmpty } from 'lodash'
 
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -48,6 +50,7 @@ function Copyright(props) {
 
 const AuthForm = ({ setSignUP, signUp }) => {
   const [singIn, setSignIn] = React.useState(false)
+  const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
   // ? Default Values
   const defaultValues = {
@@ -76,14 +79,17 @@ const AuthForm = ({ setSignUP, signUp }) => {
       //  sign in logic
       const res = await userLogin(values)
       showToastByStatus(res);
-      console.log('====================================');
-      console.log(res);
-      console.log('====================================');
+     if(!isEmpty(res.data)){
+      setCookie('user', res.data.email)
+     }
     } else {
       // register logic
       const res = await userRegister(values)
       console.log(res)
-      showToastByStatus(res)
+      showToastByStatus(res);
+      if(!isEmpty(res.data)){
+        setCookie('user', res.data.email)
+       }
     }
   }
 

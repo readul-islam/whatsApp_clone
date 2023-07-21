@@ -19,6 +19,7 @@ export const userRegister = async (req, res) => {
     // response data
     const resData = {
       email: user.email,
+      id: user.id,
     };
     res
       .status(201)
@@ -30,12 +31,12 @@ export const userRegister = async (req, res) => {
   }
 };
 
-// note: client side you will put data in params 
+// note: client side you will put data in params
 // but in server side you will get req.query
 
 export const userLogin = async (req, res, next) => {
   const { email, password } = req.query;
-  console.log(email)
+  console.log(email);
 
   try {
     const user = await User.findOne({ email });
