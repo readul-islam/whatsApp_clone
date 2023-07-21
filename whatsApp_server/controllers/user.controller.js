@@ -30,8 +30,11 @@ export const userRegister = async (req, res) => {
   }
 };
 
+// note: client side you will put data in params 
+// but in server side you will get req.query
+
 export const userLogin = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password } = req.query;
   console.log(email)
 
   try {

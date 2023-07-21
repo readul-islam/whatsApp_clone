@@ -17,7 +17,7 @@ export const userRegister = async (authInfo) => {
 //  login user
 export const userLogin = async (authInfo) => {
   try {
-    const res = await whatsApp.get(END_POINTS.LOGIN(), authInfo)
+    const res = await whatsApp.get(END_POINTS.LOGIN(), {params:authInfo})
     return commonThenResult(res)
   } catch (error) {
     console.log(error)
