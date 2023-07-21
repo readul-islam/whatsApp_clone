@@ -17,6 +17,7 @@ import { styled } from '@mui/material'
 import { useForm, FormProvider } from 'react-hook-form'
 import { literal, object, string } from 'zod'
 import FormInput from '../FormInput'
+import { userRegister } from '../../service/api'
 
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -67,13 +68,15 @@ const AuthForm = ({ setSignUP, signUp }) => {
   })
 
   // ? Submit Handler
-  const onSubmitHandler = (values) => {
+  const onSubmitHandler = async (values) => {
     if (singIn) {
       console.log(values, 'sign in')
       //  sign in logic
     } else {
       console.log(values, 'sign up')
-      // register logic
+      const user = await userRegister(values);
+      console.log(user, 'sign up')
+
     }
   }
 

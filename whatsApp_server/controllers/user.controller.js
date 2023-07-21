@@ -21,15 +21,11 @@ export const userRegister = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(err.status).json({
-      status: "fail",
-      message: err.message,
-      I,
-    });
+    next(error);
   }
 };
 
-export const userLogin = async (req, res) => {
+export const userLogin = async (req, res, next) => {
   const { email, password } = req.body;
   console.log("j");
   try {
@@ -57,15 +53,12 @@ export const userLogin = async (req, res) => {
         status: "success",
         message: "User Logged In!",
         data: {
-          id:user.id,
+          id: user.id,
           accessToken,
         },
       });
     });
   } catch (error) {
-    res.status(err.status).json({
-      status: "fail",
-      message: err.message,
-    });
+    next(error);
   }
 };
