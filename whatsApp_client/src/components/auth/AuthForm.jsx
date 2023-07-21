@@ -20,6 +20,7 @@ import FormInput from '../FormInput'
 import { userRegister } from '../../service/api'
 import { toast } from 'react-hot-toast'
 import { status } from '../../service/whatsApp'
+import { showToastByStatus } from '../../utils/hooks'
 
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -72,21 +73,16 @@ const AuthForm = ({ setSignUP, signUp }) => {
   // ? Submit Handler
   const onSubmitHandler = async (values) => {
     if (singIn) {
-      console.log(values, 'sign in')
+     
       //  sign in logic
     } else {
-      console.log(values, 'sign up')
-      const user = await userRegister(values)
+     
+      const res = await userRegister(values);
+      console.log(res)
+      showToastByStatus(res)
 
-      if (user.status === status.FAILED & user) {
-        toast.error(user.massage, { id: 1 })
-      } else if (user.status === status.SUCCESS & user) {
-        toast.error(user.massage, { id: 1 })
-      }else{
-        toast.error('Something Wrong, Try aging', { id: 1 })
-      }
 
-      console.log(user, 'sign up')
+     
     }
   }
 

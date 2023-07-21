@@ -20,7 +20,7 @@ export const userRegister = async (req, res) => {
     const resData = {
       email: user.email,
     };
-    res.status(201).json(sendToClient("success", "User Registered!", resData));
+    res.status(201).json(sendToClient("success", "Registration Successful", resData));
     {
     }
   } catch (error) {
