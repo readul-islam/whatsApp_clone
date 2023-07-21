@@ -18,6 +18,8 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { literal, object, string } from 'zod'
 import FormInput from '../FormInput'
 import { userRegister } from '../../service/api'
+import { toast } from 'react-hot-toast'
+import { status } from '../../service/whatsApp'
 
 // import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -74,9 +76,17 @@ const AuthForm = ({ setSignUP, signUp }) => {
       //  sign in logic
     } else {
       console.log(values, 'sign up')
-      const user = await userRegister(values);
-      console.log(user, 'sign up')
+      const user = await userRegister(values)
 
+      if (user.status === status.FAILED & user) {
+        toast.error(user.massage, { id: 1 })
+      } else if (user.status === status.SUCCESS & user) {
+        toast.error(user.massage, { id: 1 })
+      }else{
+        toast.error('Something Wrong, Try aging', { id: 1 })
+      }
+
+      console.log(user, 'sign up')
     }
   }
 

@@ -8,7 +8,7 @@ const END_POINTS = {
 
 export const userRegister = async (authInfo) => {
   try {
-    const res = await whatsApp.post(END_POINTS.REGISTER, authInfo)
+    const res = await whatsApp.post(END_POINTS.REGISTER(), authInfo)
     return commonThenResult(res)
   } catch (error) {
     console.log(error)
