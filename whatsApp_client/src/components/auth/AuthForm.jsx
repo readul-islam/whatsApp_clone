@@ -20,7 +20,7 @@ import FormInput from '../FormInput'
 import { userLogin, userRegister } from '../../service/api'
 import { toast } from 'react-hot-toast'
 import { status } from '../../service/whatsApp'
-import { showToastByStatus } from '../../utils/hooks'
+import { encryptedData, showToastByStatus } from '../../utils/hooks'
 import { useCookies } from 'react-cookie'
 import { isEmpty } from 'lodash'
 
@@ -50,7 +50,7 @@ function Copyright(props) {
 
 const AuthForm = ({ setSignUP, signUp }) => {
   const [singIn, setSignIn] = React.useState(false)
-  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const [cookies, setCookie, removeCookie] = useCookies(['user'])
 
   // ? Default Values
   const defaultValues = {
@@ -78,18 +78,28 @@ const AuthForm = ({ setSignUP, signUp }) => {
     if (singIn) {
       //  sign in logic
       const res = await userLogin(values)
-      showToastByStatus(res);
-     if(!isEmpty(res.data)){
-      setCookie('user', res.data.email)
-     }
+      showToastByStatus(res)
+      if (!isEmpty(res?.data)) {
+        // secure your data
+        const encrypted = encryptedData({
+          email: res.data.email,
+          id: res.data.id,
+        })
+        setCookie('user',encrypted)
+      }
     } else {
       // register logic
       const res = await userRegister(values)
       console.log(res)
-      showToastByStatus(res);
-      if(!isEmpty(res.data)){
-        setCookie('user', res.data.email)
-       }
+      showToastByStatus(res)
+      if (!isEmpty(res?.data)) {
+        // secure your data
+        const encrypted = encryptedData({
+          email: res.data.email,
+          id: res.data.id,
+        })
+        setCookie('user',encrypted)
+      }
     }
   }
 

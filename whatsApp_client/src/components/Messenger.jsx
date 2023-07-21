@@ -1,10 +1,11 @@
 import { AppBar, Box, Toolbar, styled } from '@mui/material'
-import React, { useContext } from 'react'
-import LoginDialog from './account/LoginDialog'
-import { AccountContext } from '../context/AccountProvider'
-import ChatDialog from './chat/ChatDialog'
-import { useCookies } from 'react-cookie'
 import { isEmpty } from 'lodash'
+import React, { useContext } from 'react'
+import { useCookies } from 'react-cookie'
+import { AccountContext } from '../context/AccountProvider'
+import LoginDialog from './account/LoginDialog'
+import ChatDialog from './chat/ChatDialog'
+
 
 const Container = styled(Box)`
   height: 100vh;
@@ -24,12 +25,8 @@ const Header = styled(AppBar)`
 
 const Messenger = () => {
   const { userInfo } = useContext(AccountContext)
-  const [cookies, setCookie] = useCookies(['user'])
-  console.log(cookies)
-  // console.log(userInfo)
-  if (isEmpty(cookies)) {
-    console.log('I will print')
-  }
+  const [cookies, setCookie,removeCookie] = useCookies(['user'])
+
 
   return (
     <>
