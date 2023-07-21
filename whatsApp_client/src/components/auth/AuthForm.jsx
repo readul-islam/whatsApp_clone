@@ -17,7 +17,7 @@ import { styled } from '@mui/material'
 import { useForm, FormProvider } from 'react-hook-form'
 import { literal, object, string } from 'zod'
 import FormInput from '../FormInput'
-import { userRegister } from '../../service/api'
+import { userLogin, userRegister } from '../../service/api'
 import { toast } from 'react-hot-toast'
 import { status } from '../../service/whatsApp'
 import { showToastByStatus } from '../../utils/hooks'
@@ -73,16 +73,17 @@ const AuthForm = ({ setSignUP, signUp }) => {
   // ? Submit Handler
   const onSubmitHandler = async (values) => {
     if (singIn) {
-     
       //  sign in logic
+      const res = await userLogin(values)
+      showToastByStatus(res);
+      console.log('====================================');
+      console.log(res);
+      console.log('====================================');
     } else {
-     
-      const res = await userRegister(values);
+      // register logic
+      const res = await userRegister(values)
       console.log(res)
       showToastByStatus(res)
-
-
-     
     }
   }
 

@@ -20,7 +20,9 @@ export const userRegister = async (req, res) => {
     const resData = {
       email: user.email,
     };
-    res.status(201).json(sendToClient("success", "Registration Successful", resData));
+    res
+      .status(201)
+      .json(sendToClient("success", "Registration Successful", resData));
     {
     }
   } catch (error) {
@@ -35,9 +37,7 @@ export const userLogin = async (req, res, next) => {
     const user = await User.findOne({ email });
     // if not exits
     if (!user)
-      return res
-        .status(404)
-        .send(sendToClient("fail", "The username does not exist"));
+      return res.send(sendToClient("fail", "The username does not exist"));
 
     // compare password
     user.comparePassword(password, function (err, isMatch) {
