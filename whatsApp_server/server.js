@@ -26,6 +26,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/profileImage", express.static("./profileImage"));
 app.use("/api/v1/", appRoute);
 
+// 
+app.get('/', (req,res)=>{
+  res.send({server:'on'})
+})
 //
 dbConnection(); 
 
