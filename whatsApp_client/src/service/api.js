@@ -8,6 +8,7 @@ const END_POINTS = {
   GET_USERINFO: () => 'user/update',
   SEARCH_USER: () => 'user/search',
   CREATE_CONVERSATION: () => 'conversation/add',
+  GET_MY_CONVERSATION: () => 'conversation/my-conversation',
 }
 // register user
 export const userRegister = async (authInfo) => {
@@ -60,6 +61,19 @@ export const searchUser = async (searchQuery) => {
 export const createConversation = async (bodyInfo) => {
   try {
     const res = await whatsApp.post(END_POINTS.CREATE_CONVERSATION(), bodyInfo)
+    return commonThenResult(res)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//  get all my conversation
+
+export const getMyConversation = async (id) => {
+  try {
+    const res = await whatsApp.get(END_POINTS.GET_MY_CONVERSATION(), {
+      params: { id },
+    })
     return commonThenResult(res)
   } catch (error) {
     console.log(error)

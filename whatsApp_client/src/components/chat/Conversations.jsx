@@ -1,6 +1,7 @@
 import React from 'react'
 import Conversation from './Conversation'
-import { Box, Divider, styled } from '@mui/material'
+import { Box, Divider, Typography, styled } from '@mui/material'
+import { isEmpty } from 'lodash'
 
 // const users = [
 //   {
@@ -33,21 +34,38 @@ const StyledDivider = styled(Divider)(({ theme }) => ({
   opacity: 0.5,
 }))
 
-const Conversations = ({ setSelectedUser, users }) => {
+const emptyText = {
+  height: '100%',
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+
+  justifyContent: 'center',
+  alignItems: 'center',
+}
+
+const text = { fontSize: '24px', color: 'gray' }
+
+const Conversations = ({ setSelectedUser, myConversation }) => {
   const handler = (user) => {
     setSelectedUser(user)
-    console.log('====================================')
-    console.log('hhh')
-    console.log('====================================')
   }
+
+  console.log(myConversation, 'dd')
   return (
     <Container>
-      {users.map((user) => (
-        <Box key={user._id} onClick={() => handler(user)}>
-          <Conversation user={user} />
-          <StyledDivider />
+      {isEmpty(myConversation) ? (
+        <Box sx={emptyText}>
+          <Typography sx={text}>You haven't Conversation</Typography>
         </Box>
-      ))}
+      ) : (
+        myConversation.map((user) => (
+          <Box key={user._id} onClick={() => handler(user)}>
+            <Conversation user={user} />
+            <StyledDivider />
+          </Box>
+        ))
+      )}
     </Container>
   )
 }

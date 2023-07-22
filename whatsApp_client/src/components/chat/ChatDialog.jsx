@@ -1,13 +1,13 @@
 import { Box, Dialog, styled } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import Menu from './Menu'
-import EmptyChat from './chat/EmptyChat'
-import ChatBox from './chat/ChatBox'
-import { getAllUsers } from '../../service/api'
 import { useCookies } from 'react-cookie'
+import { getMyConversation } from '../../service/api'
 import { decryptedData } from '../../utils/hooks'
-import AddFriend from './AddFriendIcon'
 import AddFriendDialog from './AddFriendDialog'
+import Menu from './Menu'
+import ChatBox from './chat/ChatBox'
+import EmptyChat from './chat/EmptyChat'
+import { status } from '../../service/whatsApp'
 
 const CustomDialog = styled(Dialog)(({ theme }) => ({
   '& 	.MuiDialog-paper': {
@@ -18,15 +18,6 @@ const CustomDialog = styled(Dialog)(({ theme }) => ({
     margin: '20px',
     overflow: 'hidden',
     borderRadius: 0,
-
-    // [theme.breakpoints.down('md')]: {
-    //   height: '90%',
-    //   width: '100%',
-    // },
-    // [theme.breakpoints.down('lg')]: {
-    //   height: '90%',
-    //   width: '80%',
-    // },
   },
 }))
 
@@ -51,22 +42,22 @@ const ChatContainer = styled(Box)(({ theme }) => ({
 const ChatDialog = () => {
   const [selectedUser, setSelectedUser] = useState(null)
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
-  const [users, setUsers] = useState([])
+  const [myConversation, setMyConversation] = useState([])
   const [addFriend, setAddFriend] = useState(false)
-  console.log(selectedUser)
+  const [reload, setReload] = useState(false)
+
   useEffect(() => {
     const user = decryptedData(cookies.user)
     console.log(user)
     const fetchData = async () => {
-      const users = await getAllUsers(user.id)
-      console.log(users)
-      if (users.data) {
-        setUsers(users.data)
+      const conversation = await getMyConversation(user.id)
+      console.log(conversation)
+      if (conversation.status === status.SUCCESS) {
+        setMyConversation(conversation.data)
       }
     }
     fetchData()
-  }, [])
-  console.log(users)
+  }, [reload])
 
   const addFriendStateHandler = () => {
     setAddFriend(true)
@@ -77,14 +68,19 @@ const ChatDialog = () => {
         <MenuContainer>
           <Menu
             addFriendStateHandler={addFriendStateHandler}
-            users={users}
+            myConversation={myConversation}
             setSelectedUser={setSelectedUser}
           />
         </MenuContainer>
         <ChatContainer>
           {selectedUser ? <ChatBox /> : <EmptyChat />}
         </ChatContainer>
-        <AddFriendDialog setAddFriend={setAddFriend} addFriend={addFriend} />
+        <AddFriendDialog
+          reload={reload}
+          setReload={setReload}
+          setAddFriend={setAddFriend}
+          addFriend={addFriend}
+        />
       </Container>
     </CustomDialog>
   )

@@ -72,7 +72,7 @@ const CustomButton = styled(Button)(({ theme }) => ({
   fontWeight: 600,
 }))
 
-const AddFriendDialog = ({ addFriend, setAddFriend }) => {
+const AddFriendDialog = ({ addFriend, setAddFriend, setReload, reload }) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [users, setUsers] = useState([])
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
@@ -89,8 +89,12 @@ const AddFriendDialog = ({ addFriend, setAddFriend }) => {
   useEffect(() => {
     const fetchData = async () => {
       const users = await searchUser(searchQuery)
+      console.log(users)
+
       if (users.data.length > 0) {
-        setUsers(users.data)
+        const filter = users.data.filter((u) => u._id !== user.id)
+        console.log(filter)
+        setUsers(filter)
       } else {
       }
     }
@@ -117,6 +121,7 @@ const AddFriendDialog = ({ addFriend, setAddFriend }) => {
     showToastByStatus(connect)
     if (connect.status === status.SUCCESS) {
       setAddFriend(false)
+      setReload(!reload)
     }
   }
   return (

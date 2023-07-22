@@ -4,12 +4,15 @@ import Search from './Search'
 import Conversations from './Conversations'
 import AddFriend from './AddFriendIcon'
 
-const Menu = ({ setSelectedUser, users, addFriendStateHandler }) => {
+const Menu = ({ setSelectedUser, myConversation, addFriendStateHandler }) => {
   return (
     <>
       <Header />
       <Search />
-      <Conversations users={users} setSelectedUser={setSelectedUser} />
+      <Conversations
+        myConversation={myConversation}
+        setSelectedUser={setSelectedUser}
+      />
       <AddFriend onClickHandler={addFriendStateHandler} />
     </>
   )
