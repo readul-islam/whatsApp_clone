@@ -16,14 +16,23 @@ const Image = styled('img')(({ theme }) => ({
 }))
 
 const Conversation = ({ user }) => {
+  console.log(user?.image)
   return (
     <Container>
       <Box>
-        <Image src={user.image} alt='' />
+        <Image
+          // crossorigin='anonymous'
+          src={
+            user.image
+              ? `http://localhost:8080/${user.image}`
+              : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+          }
+          alt=''
+        />
       </Box>
       <Box>
         <Box>
-          <Typography>{user.name}</Typography>
+          <Typography>{user.userName ? user.userName : 'unknown'}</Typography>
         </Box>
       </Box>
     </Container>

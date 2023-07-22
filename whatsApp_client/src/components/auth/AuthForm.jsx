@@ -48,7 +48,7 @@ function Copyright(props) {
 
 // const defaultTheme = createTheme();
 
-const AuthForm = ({ setSignUP, signUp }) => {
+const AuthForm = ({ setSignUP, signUp,setUpdateInfoDialogOpen }) => {
   const [singIn, setSignIn] = React.useState(false)
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
 
@@ -85,7 +85,7 @@ const AuthForm = ({ setSignUP, signUp }) => {
           email: res.data.email,
           id: res.data.id,
         })
-        setCookie('user',encrypted)
+        setCookie('user', encrypted)
       }
     } else {
       // register logic
@@ -98,7 +98,8 @@ const AuthForm = ({ setSignUP, signUp }) => {
           email: res.data.email,
           id: res.data.id,
         })
-        setCookie('user',encrypted)
+        setCookie('user', encrypted)
+        setUpdateInfoDialogOpen(true)
       }
     }
   }

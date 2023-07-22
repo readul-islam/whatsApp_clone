@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { iconStyle } from './Header'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { Menu, MenuItem, styled } from '@mui/material'
+import { useCookies } from 'react-cookie'
 
 const MenuOption = styled(MenuItem)(({ theme }) => ({
   fontSize: '14px',
@@ -10,14 +11,19 @@ const MenuOption = styled(MenuItem)(({ theme }) => ({
 }))
 
 const HeaderOptionMenu = ({ setOpen }) => {
-  const [openOptionMenu, setOpenOptionMenu] = useState(null)
-
+  const [openOptionMenu, setOpenOptionMenu] = useState('')
+  const [cookies, setCookie,removeCookie] = useCookies(['user'])
   const ClickHandler = (e) => {
     setOpenOptionMenu(e.currentTarget)
   }
 
   const handleClose = () => {
     setOpenOptionMenu(null)
+  }
+
+  const logOutHandler = () =>{
+    removeCookie('user');
+    handleClose();
   }
 
   return (
@@ -27,7 +33,7 @@ const HeaderOptionMenu = ({ setOpen }) => {
         anchorEl={openOptionMenu}
         open={openOptionMenu}
         onClose={handleClose}
-        keepMounted
+        keepMounted={true}
         getContentAnchorE1={null}
         anchorOrigin={{
           vertical: 'bottom',
@@ -47,7 +53,7 @@ const HeaderOptionMenu = ({ setOpen }) => {
           Profile
         </MenuOption>
         <MenuOption onClick={handleClose}>My account</MenuOption>
-        <MenuOption onClick={handleClose}>Logout</MenuOption>
+        <MenuOption onClick={logOutHandler}>Logout</MenuOption>
       </Menu>
     </>
   )

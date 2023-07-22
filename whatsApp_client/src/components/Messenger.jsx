@@ -1,11 +1,11 @@
 import { AppBar, Box, Toolbar, styled } from '@mui/material'
 import { isEmpty } from 'lodash'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { AccountContext } from '../context/AccountProvider'
 import LoginDialog from './account/LoginDialog'
 import ChatDialog from './chat/ChatDialog'
-
+import UpdateInfoDialog from './UpdateInfoDialog'
 
 const Container = styled(Box)`
   height: 100vh;
@@ -25,8 +25,8 @@ const Header = styled(AppBar)`
 
 const Messenger = () => {
   const { userInfo } = useContext(AccountContext)
-  const [cookies, setCookie,removeCookie] = useCookies(['user'])
-
+  const [cookies, setCookie, removeCookie] = useCookies(['user'])
+  const [updateInfoDialogOpen, setUpdateInfoDialogOpen] = useState(false)
 
   return (
     <>
@@ -35,9 +35,9 @@ const Messenger = () => {
           {/* chat page or main page */}
           <Container>
             <AuthPageHeader>
-              <Toolbar></Toolbar>
+              <Toolbar />
             </AuthPageHeader>
-            <LoginDialog />
+            <LoginDialog setUpdateInfoDialogOpen={setUpdateInfoDialogOpen} />
           </Container>
         </>
       ) : (
@@ -45,9 +45,13 @@ const Messenger = () => {
           {/* simple Login page */}
 
           <Header>
-            <Toolbar></Toolbar>
+            <Toolbar />
           </Header>
           <ChatDialog />
+          <UpdateInfoDialog
+            updateInfoDialogOpen={updateInfoDialogOpen}
+            setUpdateInfoDialogOpen={setUpdateInfoDialogOpen}
+          />
         </>
       )}
     </>

@@ -148,7 +148,7 @@ const CustomGoogleButton = styled(Box)(({ theme }) => ({
   },
 }))
 
-const LoginDialog = () => {
+const LoginDialog = ({setUpdateInfoDialogOpen}) => {
   const { userInfo, setUserInfo } = useContext(AccountContext)
   const [signUp, setSignUP] = useState(false)
 
@@ -166,7 +166,7 @@ const LoginDialog = () => {
     >
       {signUp ? (
         <>
-        <AuthForm signUp={signUp} setSignUP={setSignUP}/>
+        <AuthForm setUpdateInfoDialogOpen={setUpdateInfoDialogOpen}  signUp={signUp} setSignUP={setSignUP}/>
         </>
       ) : (
         <>

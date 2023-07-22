@@ -3,12 +3,12 @@ import Header from './Header'
 import Search from './Search'
 import Conversations from './Conversations'
 
-const Menu = ({ setSelectedUser }) => {
+const Menu = ({ setSelectedUser ,users}) => {
   return (
     <>
       <Header />
       <Search />
-      <Conversations setSelectedUser={setSelectedUser} />
+      <Conversations users={users} setSelectedUser={setSelectedUser} />
     </>
   )
 }

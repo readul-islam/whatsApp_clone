@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
-import { sendToClient } from "../utils/hooks.js";
+import { escape, sendToClient } from "../utils/hooks.js";
 
 export const userRegister = async (req, res) => {
   try {
@@ -66,9 +66,82 @@ export const userLogin = async (req, res, next) => {
       const resData = {
         id: user.id,
         accessToken,
+        email: user.email,
       };
       res.status(201).json(sendToClient("success", "User Logged In!", resData));
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateUserInfo = async (req, res, next) => {
+  const { id, userName, About } = req.body;
+  console.log(req.body);
+  console.log(req.file.path);
+
+  const updateUserInfo = {
+    userName,
+    About,
+    image: req.file.path,
+  };
+
+  let updatedUser = await User.findOneAndUpdate({ _id: id }, updateUserInfo, {
+    // upsert: true,
+    new: true,
+  });
+  console.log(updatedUser);
+  res.status(200).json(sendToClient("success", "update", updatedUser));
+  try {
+  } catch (error) {
+    next(error);
+  }
+};
+export const allUserWithOutMe = async (req, res, next) => {
+  const { id } = req.query;
+
+  if (id) {
+    let users = await User.find().where("_id").ne(id);
+    res.status(200).json(sendToClient("success", "update", users));
+  } else {
+    res.status(200).json(sendToClient("fail", "userId required"));
+  }
+  try {
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const searchUser = async (req, res, next) => {
+  const query = req.query.searchQuery;
+
+  const name_search_regex = new RegExp(escape(query), "i");
+  const email_search_regex = new RegExp("^" + escape(query) + "$", "i");
+  console.log(email_search_regex)
+ 
+  try {
+    if (query !== "") {
+      const users = await User.find(
+        {
+          $or: [
+            {
+              // userName:{ '$regex': query, $options: 'i' }, // acceptable
+              userName: name_search_regex, // acceptable
+            },
+            {
+             
+              email: email_search_regex, // acceptable
+            },
+          ],
+        },
+        "name image"
+      );
+      res.status(200).json(sendToClient("success", "user list", users));
+    } else {
+      res
+        .status(200)
+        .json(sendToClient("fail", "You must provide some text to search!"));
+    }
   } catch (error) {
     next(error);
   }

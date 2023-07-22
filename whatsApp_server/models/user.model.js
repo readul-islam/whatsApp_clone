@@ -3,36 +3,39 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 
 const SALT_WORK_FACTOR = 10;
-const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    validate: {
-      validator: function (v) {
-        return /.+\@.+\..+/.test(v);
+const UserSchema = new mongoose.Schema(
+  {
+    userName: {
+      type: String,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      validate: {
+        validator: function (v) {
+          return /.+\@.+\..+/.test(v);
+        },
+        message: (props) => `${props.value} is not a valid email address!`,
       },
-      message: (props) => `${props.value} is not a valid email address!`,
+    },
+
+    password: { type: String, required: true },
+    image: {
+      type: String,
+    },
+    verified: {
+      type: Boolean,
+    },
+    About: {
+      type: String,
+    },
+    token: {
+      type: String,
     },
   },
-
-  password: { type: String, required: true },
-  image: {
-    type: String,
-  },
-  verified: {
-    type: Boolean,
-  },
-  About: {
-    type: String,
-  },
-  token:{
-    type: String,
-  }
-});
+  { timestamps: true }
+);
 
 UserSchema.pre("save", function (next) {
   // only hash the password if it has been modified (or is new)
