@@ -6,6 +6,8 @@ import ChatBox from './chat/ChatBox'
 import { getAllUsers } from '../../service/api'
 import { useCookies } from 'react-cookie'
 import { decryptedData } from '../../utils/hooks'
+import AddFriend from './AddFriendIcon'
+import AddFriendDialog from './AddFriendDialog'
 
 const CustomDialog = styled(Dialog)(({ theme }) => ({
   '& 	.MuiDialog-paper': {
@@ -36,6 +38,7 @@ const Container = styled(Box)(({ theme }) => ({
 const MenuContainer = styled(Box)(({ theme }) => ({
   minWidth: '450px',
   height: '100%',
+  position: 'relative',
 }))
 
 const ChatContainer = styled(Box)(({ theme }) => ({
@@ -49,29 +52,39 @@ const ChatDialog = () => {
   const [selectedUser, setSelectedUser] = useState(null)
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const [users, setUsers] = useState([])
+  const [addFriend, setAddFriend] = useState(false)
   console.log(selectedUser)
   useEffect(() => {
     const user = decryptedData(cookies.user)
     console.log(user)
     const fetchData = async () => {
       const users = await getAllUsers(user.id)
-      
-      if (users?.data) {
+      console.log(users)
+      if (users.data) {
         setUsers(users.data)
       }
     }
     fetchData()
   }, [])
-console.log(users)
+  console.log(users)
+
+  const addFriendStateHandler = () => {
+    setAddFriend(true)
+  }
   return (
     <CustomDialog maxWidth={'md'} hideBackdrop open={true}>
       <Container>
         <MenuContainer>
-          <Menu users={users} setSelectedUser={setSelectedUser} />
+          <Menu
+            addFriendStateHandler={addFriendStateHandler}
+            users={users}
+            setSelectedUser={setSelectedUser}
+          />
         </MenuContainer>
         <ChatContainer>
           {selectedUser ? <ChatBox /> : <EmptyChat />}
         </ChatContainer>
+        <AddFriendDialog setAddFriend={setAddFriend} addFriend={addFriend} />
       </Container>
     </CustomDialog>
   )

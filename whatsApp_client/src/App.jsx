@@ -10,8 +10,8 @@ function App() {
       <AccountProvider>
         <CookiesProvider>
           <div>
-          <Messenger />
-          <ToasterContainer />
+            <Messenger />
+            <ToasterContainer />
           </div>
         </CookiesProvider>
       </AccountProvider>

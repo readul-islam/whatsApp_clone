@@ -6,6 +6,8 @@ const END_POINTS = {
   LOGIN: () => 'user/login',
   GET_USERS: () => 'user/users',
   GET_USERINFO: () => 'user/update',
+  SEARCH_USER: () => 'user/search',
+  CREATE_CONVERSATION: () => 'conversation/add',
 }
 // register user
 export const userRegister = async (authInfo) => {
@@ -19,7 +21,7 @@ export const userRegister = async (authInfo) => {
 //  login user
 export const userLogin = async (authInfo) => {
   try {
-    const res = await whatsApp.get(END_POINTS.LOGIN(), {params:authInfo})
+    const res = await whatsApp.get(END_POINTS.LOGIN(), { params: authInfo })
     return commonThenResult(res)
   } catch (error) {
     console.log(error)
@@ -28,13 +30,13 @@ export const userLogin = async (authInfo) => {
 //  login user
 export const getAllUsers = async (id) => {
   try {
-    const res = await whatsApp.get(END_POINTS.GET_USERS(), {params:{id}})
+    const res = await whatsApp.get(END_POINTS.GET_USERS(), { params: { id } })
     return commonThenResult(res)
   } catch (error) {
     console.log(error)
   }
 }
-//  login user
+//  update user information
 export const updateUserInfo = async (formData) => {
   try {
     const res = await whatsApp.put(END_POINTS.GET_USERINFO(), formData)
@@ -43,6 +45,23 @@ export const updateUserInfo = async (formData) => {
     console.log(error)
   }
 }
-
-
-
+//  search user
+export const searchUser = async (searchQuery) => {
+  try {
+    const res = await whatsApp.get(END_POINTS.SEARCH_USER(), {
+      params: { searchQuery },
+    })
+    return commonThenResult(res)
+  } catch (error) {
+    console.log(error)
+  }
+}
+//  create new conversation
+export const createConversation = async (bodyInfo) => {
+  try {
+    const res = await whatsApp.post(END_POINTS.CREATE_CONVERSATION(), bodyInfo)
+    return commonThenResult(res)
+  } catch (error) {
+    console.log(error)
+  }
+}

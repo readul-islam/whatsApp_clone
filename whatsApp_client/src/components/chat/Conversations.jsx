@@ -33,7 +33,7 @@ const StyledDivider = styled(Divider)(({ theme }) => ({
   opacity: 0.5,
 }))
 
-const Conversations = ({ setSelectedUser,users }) => {
+const Conversations = ({ setSelectedUser, users }) => {
   const handler = (user) => {
     setSelectedUser(user)
     console.log('====================================')

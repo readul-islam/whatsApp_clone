@@ -5,7 +5,7 @@ import ChatFooter from './ChatFooter'
 
 const Wrapper = styled(Box)(({ theme }) => ({
   backgroundImage: `url(${BackgroundImage})`,
-  backgroundSize:'50%'
+  backgroundSize: '50%',
 }))
 
 const Component = styled(Box)(({ theme }) => ({
@@ -16,11 +16,9 @@ const Component = styled(Box)(({ theme }) => ({
 const Messages = () => {
   return (
     <Wrapper>
-      <Component>
+      <Component></Component>
 
-      </Component>
-
-      <ChatFooter/>
+      <ChatFooter />
     </Wrapper>
   )
 }

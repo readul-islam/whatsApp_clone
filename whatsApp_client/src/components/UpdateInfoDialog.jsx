@@ -17,7 +17,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import CameraAltIcon from '@mui/icons-material/CameraAlt'
 import { updateUserInfo } from '../service/api'
 import { useCookies } from 'react-cookie'
-import { decryptedData } from '../utils/hooks'
+import { decryptedData, encryptedData } from '../utils/hooks'
 import { status } from '../service/whatsApp'
 import { toast } from 'react-hot-toast'
 const CustomDialog = styled(Dialog)(({ theme }) => ({
@@ -158,8 +158,16 @@ const UpdateInfoDialog = ({
       const updated = await updateUserInfo(formData)
       console.log(updated)
       if (updated.status === status.SUCCESS) {
-        toast.success(updated.message ,{id:1})
+        toast.success(updated.message, { id: 1 })
         setUpdateInfoDialogOpen(false)
+        // set cookies
+        const encrypted = encryptedData({
+          email: updated.data.email,
+          id: updated.data._id,
+          image: updated.data.image,
+          userName: updated.data.userName,
+        })
+        setCookie('user', encrypted)
       }
     } else {
       console.log('123')
@@ -191,7 +199,9 @@ const UpdateInfoDialog = ({
         <Typography sx={{ fontSize: 22, fontWeight: 600, color: '#758a7a' }}>
           Welcome
         </Typography>
-        <Typography sx={{ color: '#91a195' }}>
+        <Typography
+          sx={{ color: '#91a195', fontSize: 14, fontStyle: 'italic' }}
+        >
           Please Enter your information
         </Typography>
         <FormProvider {...methods}>

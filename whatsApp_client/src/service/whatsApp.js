@@ -12,7 +12,7 @@ export const commonThenResult = (result) => result.data
 
 export const status = {
   FAILED: 'fail',
-  SUCCESS: "success",
+  SUCCESS: 'success',
 }
 
 export default whatsApp

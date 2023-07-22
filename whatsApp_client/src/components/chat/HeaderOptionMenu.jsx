@@ -12,7 +12,7 @@ const MenuOption = styled(MenuItem)(({ theme }) => ({
 
 const HeaderOptionMenu = ({ setOpen }) => {
   const [openOptionMenu, setOpenOptionMenu] = useState('')
-  const [cookies, setCookie,removeCookie] = useCookies(['user'])
+  const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const ClickHandler = (e) => {
     setOpenOptionMenu(e.currentTarget)
   }
@@ -21,9 +21,9 @@ const HeaderOptionMenu = ({ setOpen }) => {
     setOpenOptionMenu(null)
   }
 
-  const logOutHandler = () =>{
-    removeCookie('user');
-    handleClose();
+  const logOutHandler = () => {
+    removeCookie('user')
+    handleClose()
   }
 
   return (

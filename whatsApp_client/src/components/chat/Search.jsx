@@ -28,12 +28,12 @@ const Icon = styled(Box)(({ theme }) => ({
 }))
 
 const TextField = styled(InputBase)(({ theme }) => ({
-  color: '#3B444B',
-  fontSize: '14px',
+  // color: '#3B444B',
+  fontSize: '15px',
   paddingLeft: '8px',
 }))
 
-const Search = () => {
+const Search = ({ ...otherProps }) => {
   return (
     <>
       <Container>
@@ -41,7 +41,7 @@ const Search = () => {
           <Icon>
             <SearchIcon fontSize='small' />
           </Icon>
-          <TextField placeholder='Search or start new chart' />
+          <TextField {...otherProps} placeholder='Search or start new chart' />
         </Wrapper>
         <TornadoIcon fontSize='small' sx={{ color: '#919191' }} />
       </Container>

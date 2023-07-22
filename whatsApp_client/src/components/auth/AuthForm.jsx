@@ -48,7 +48,7 @@ function Copyright(props) {
 
 // const defaultTheme = createTheme();
 
-const AuthForm = ({ setSignUP, signUp,setUpdateInfoDialogOpen }) => {
+const AuthForm = ({ setSignUP, signUp, setUpdateInfoDialogOpen }) => {
   const [singIn, setSignIn] = React.useState(false)
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
 

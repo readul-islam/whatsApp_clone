@@ -5,9 +5,9 @@ import { Box } from '@mui/material'
 
 const ChatBox = () => {
   return (
-    <Box style={{height:'75%'}}>
-      <ChatHeader/>
-      <Messages/>
+    <Box style={{ height: '75%' }}>
+      <ChatHeader />
+      <Messages />
     </Box>
   )
 }

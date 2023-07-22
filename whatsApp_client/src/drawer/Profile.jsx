@@ -63,7 +63,6 @@ const CustomCameraBox = styled(Box)(({ theme }) => ({
   cursor: 'pointer',
   display: 'none',
   transition: '5s ease',
-
 }))
 
 const CustomLabel = styled('label')(({ theme }) => ({
