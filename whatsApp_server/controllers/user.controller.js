@@ -134,7 +134,7 @@ export const searchUser = async (req, res, next) => {
             },
           ],
         },
-        "name image"
+        "userName image"
       );
       res.status(200).json(sendToClient("success", "user list", users));
     } else {
