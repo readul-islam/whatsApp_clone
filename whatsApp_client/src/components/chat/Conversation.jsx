@@ -17,20 +17,21 @@ const Image = styled('img')(({ theme }) => ({
   borderRadius: '50%',
 }))
 
-const Conversation = ({ user }) => {
+const Conversation = ({ conversation, setSelectedUser }) => {
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
-  console.log(user, 'user')
-  let auth = decryptedData(cookies.user)
+  console.log(conversation, 'user')
+  let auth = decryptedData(cookies.user);
+  console.log(auth,'4444444444')
 
   return (
-    <Container>
-      {user.creator.id === auth.id ? (
-        <>
+    <>
+      {conversation.creator.id === auth.id ? (
+        <Container onClick={() => setSelectedUser(conversation.participant)}>
           <Image
             crossorigin='anonymous'
             src={
-              user.participant.image
-                ? `http://localhost:8080/${user.participant.image}`
+              conversation.participant.image
+                ? `http://localhost:8080/${conversation.participant.image}`
                 : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
             }
             alt=''
@@ -38,31 +39,33 @@ const Conversation = ({ user }) => {
 
           <Box>
             <Typography>
-              {user.participant.userName
-                ? user.participant.userName
+              {conversation.participant.userName
+                ? conversation.participant.userName
                 : 'unknown'}
             </Typography>
           </Box>
-        </>
+        </Container>
       ) : (
-        <>
+        <Container onClick={() => setSelectedUser(conversation.creator)}>
           <Image
             crossorigin='anonymous'
             src={
-              user.participant.image
-                ? `http://localhost:8080/${user.creator.image}`
+              conversation.creator.image
+                ? `http://localhost:8080/${conversation.creator.image}`
                 : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
             }
             alt=''
           />
           <Box>
             <Typography>
-              {user.creator.userName ? user.creator.userName : 'unknown'}
+              {conversation.creator.userName
+                ? conversation.creator.userName
+                : 'unknown'}
             </Typography>
           </Box>
-        </>
+        </Container>
       )}
-    </Container>
+    </>
   )
 }
 

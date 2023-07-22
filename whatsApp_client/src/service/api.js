@@ -7,6 +7,8 @@ const END_POINTS = {
   GET_USERS: () => 'user/users',
   GET_USERINFO: () => 'user/update',
   SEARCH_USER: () => 'user/search',
+  CREATE_NEW_MESSAGE: () => 'message/new',
+  GET_MY_MESSAGES: () => 'message/get-messages',
   CREATE_CONVERSATION: () => 'conversation/add',
   GET_MY_CONVERSATION: () => 'conversation/my-conversation',
 }
@@ -51,6 +53,26 @@ export const searchUser = async (searchQuery) => {
   try {
     const res = await whatsApp.get(END_POINTS.SEARCH_USER(), {
       params: { searchQuery },
+    })
+    return commonThenResult(res)
+  } catch (error) {
+    console.log(error)
+  }
+}
+//  send new message
+export const sendNewMessage = async (bodyInfo) => {
+  try {
+    const res = await whatsApp.post(END_POINTS.CREATE_NEW_MESSAGE(), bodyInfo)
+    return commonThenResult(res)
+  } catch (error) {
+    console.log(error)
+  }
+}
+//  get new message
+export const getMessages = async (query) => {
+  try {
+    const res = await whatsApp.get(END_POINTS.GET_MY_MESSAGES(), {
+      params: { conversation_id: query },
     })
     return commonThenResult(res)
   } catch (error) {

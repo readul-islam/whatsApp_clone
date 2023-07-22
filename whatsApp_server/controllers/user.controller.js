@@ -115,10 +115,11 @@ export const allUserWithOutMe = async (req, res, next) => {
 export const searchUser = async (req, res, next) => {
   const query = req.query.searchQuery;
 
+
   const name_search_regex = new RegExp(escape(query), "i");
   const email_search_regex = new RegExp("^" + escape(query) + "$", "i");
-  console.log(email_search_regex)
- 
+  console.log(email_search_regex);
+
   try {
     if (query !== "") {
       const users = await User.find(
@@ -129,7 +130,6 @@ export const searchUser = async (req, res, next) => {
               userName: name_search_regex, // acceptable
             },
             {
-             
               email: email_search_regex, // acceptable
             },
           ],

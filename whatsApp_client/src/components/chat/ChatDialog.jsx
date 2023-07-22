@@ -42,9 +42,10 @@ const ChatContainer = styled(Box)(({ theme }) => ({
 const ChatDialog = () => {
   const [selectedUser, setSelectedUser] = useState(null)
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
-  const [myConversation, setMyConversation] = useState([])
+  const [myConversations, setMyConversations] = useState([])
   const [addFriend, setAddFriend] = useState(false)
   const [reload, setReload] = useState(false)
+  const [conversationId, setConversationId] = useState('')
 
   useEffect(() => {
     const user = decryptedData(cookies.user)
@@ -53,7 +54,7 @@ const ChatDialog = () => {
       const conversation = await getMyConversation(user.id)
       console.log(conversation)
       if (conversation.status === status.SUCCESS) {
-        setMyConversation(conversation.data)
+        setMyConversations(conversation.data)
       }
     }
     fetchData()
@@ -62,18 +63,29 @@ const ChatDialog = () => {
   const addFriendStateHandler = () => {
     setAddFriend(true)
   }
+  //
+
+  console.log(selectedUser, conversationId);
+
   return (
     <CustomDialog maxWidth={'md'} hideBackdrop open={true}>
       <Container>
         <MenuContainer>
           <Menu
+            setConversationId={setConversationId}
             addFriendStateHandler={addFriendStateHandler}
-            myConversation={myConversation}
+            myConversations={myConversations}
             setSelectedUser={setSelectedUser}
           />
         </MenuContainer>
         <ChatContainer>
-          {selectedUser ? <ChatBox /> : <EmptyChat />}
+          {selectedUser ? (
+            <ChatBox
+            conversationId={conversationId}
+            selectedUser={selectedUser} />
+          ) : (
+            <EmptyChat />
+          )}
         </ChatContainer>
         <AddFriendDialog
           reload={reload}

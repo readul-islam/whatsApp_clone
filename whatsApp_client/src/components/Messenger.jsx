@@ -6,6 +6,7 @@ import { AccountContext } from '../context/AccountProvider'
 import LoginDialog from './account/LoginDialog'
 import ChatDialog from './chat/ChatDialog'
 import UpdateInfoDialog from './UpdateInfoDialog'
+import { decryptedData } from '../utils/hooks'
 
 const Container = styled(Box)`
   height: 100vh;
@@ -22,11 +23,15 @@ const Header = styled(AppBar)`
   background: #00a884;
   box-shadow: none;
 `
-
+export let Auth ;
 const Messenger = () => {
   const { userInfo } = useContext(AccountContext)
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const [updateInfoDialogOpen, setUpdateInfoDialogOpen] = useState(false)
+
+
+  Auth = decryptedData(cookies.user)
+
 
   return (
     <>

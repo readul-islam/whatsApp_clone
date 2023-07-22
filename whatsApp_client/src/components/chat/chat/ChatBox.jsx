@@ -3,11 +3,11 @@ import ChatHeader from './ChatHeader'
 import Messages from './Messages'
 import { Box } from '@mui/material'
 
-const ChatBox = () => {
+const ChatBox = ({selectedUser,conversationId}) => {
   return (
     <Box style={{ height: '75%' }}>
-      <ChatHeader />
-      <Messages />
+      <ChatHeader selectedUser={selectedUser}/>
+      <Messages selectedUser={selectedUser} conversationId={conversationId} />
     </Box>
   )
 }

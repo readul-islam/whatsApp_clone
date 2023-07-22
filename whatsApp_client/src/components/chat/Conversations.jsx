@@ -46,22 +46,27 @@ const emptyText = {
 
 const text = { fontSize: '24px', color: 'gray' }
 
-const Conversations = ({ setSelectedUser, myConversation }) => {
-  const handler = (user) => {
-    setSelectedUser(user)
-  }
-
-  console.log(myConversation, 'dd')
+const Conversations = ({
+  setSelectedUser,
+  myConversations,
+  setConversationId,
+}) => {
   return (
     <Container>
-      {isEmpty(myConversation) ? (
+      {isEmpty(myConversations) ? (
         <Box sx={emptyText}>
           <Typography sx={text}>You haven't Conversation</Typography>
         </Box>
       ) : (
-        myConversation.map((user) => (
-          <Box key={user._id} onClick={() => handler(user)}>
-            <Conversation user={user} />
+        myConversations.map((conversation) => (
+          <Box
+            key={conversation._id}
+            onClick={() => setConversationId(conversation._id)}
+          >
+            <Conversation
+              setSelectedUser={setSelectedUser}
+              conversation={conversation}
+            />
             <StyledDivider />
           </Box>
         ))

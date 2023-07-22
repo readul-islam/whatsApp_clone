@@ -8,9 +8,11 @@ export const addConversation = async (req, res, next) => {
       "creator.id": creator.id,
       "participant.id": participant.id,
     });
-   
+
     if (exits) {
-     return res.status(200).json(sendToClient("fail", "conversation already exists",exits));
+      return res
+        .status(200)
+        .json(sendToClient("fail", "conversation already exists", exits));
     }
     // console.log(req.body)
     const newConversation = new Conversation(req.body);
@@ -23,4 +25,21 @@ export const addConversation = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+export const getConversationById = async (req, res, next) => {
+  const { id } = req.query;
+  console.log(id);
+  try {
+    const myConversation = await Conversation.find({
+      $or: [{ "creator.id": id }, { "participant.id": id }],
+    }).sort("createdAt");
+    if (!myConversation.length > 0)
+      return res
+        .status(200)
+        .json(sendToClient("fail", `You haven't conversation`));
+    res
+      .status(200)
+      .json(sendToClient("success", "conversation found", myConversation));
+  } catch (error) {}
 };

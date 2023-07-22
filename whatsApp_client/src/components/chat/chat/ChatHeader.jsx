@@ -80,7 +80,7 @@ const Status = styled(Typography)(({ theme }) => ({
   color: 'rgba(0,0,0,0.6)',
 }))
 
-const ChatHeader = () => {
+const ChatHeader = ({selectedUser}) => {
   var status = navigator.onLine ? 'online' : 'offline'
   console.log(status)
   return (
@@ -95,8 +95,9 @@ const ChatHeader = () => {
                 variant='dot'
               >
                 <Avatar
+                  crossorigin='anonymous'
                   alt='Remy Sharp'
-                  src='https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg'
+                  src={`http://localhost:8080/${selectedUser.image}`}
                 />
               </OnlineBadge>
             </>
@@ -108,14 +109,15 @@ const ChatHeader = () => {
                 variant='dot'
               >
                 <Avatar
+                  crossorigin='anonymous'
                   alt='Remy Sharp'
-                  src='https://png.pngtree.com/png-vector/20190321/ourmid/pngtree-vector-users-icon-png-image_856952.jpg'
+                  src={`http://localhost:8080/${selectedUser.image}`}
                 />
               </OfflineBadge>
             </>
           )}
           <Box>
-            <Name>Name</Name>
+            <Name>{selectedUser.userName}</Name>
             {status === 'online' ? (
               <Status>Online</Status>
             ) : (

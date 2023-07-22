@@ -12,6 +12,9 @@ const conversationSchema = mongoose.Schema(
       userName: String,
       image: String,
     },
+    latest_message: {
+      type: String,
+    },
     last_update: {
       type: Date,
       default: Date.now,
