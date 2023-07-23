@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 
 const io = new Server(9000, {
   cors: true,
-  origins: ["https://magenta-froyo-758119.netlify.app/"],
+  origins: ["https://magenta-froyo-758119.netlify.app"],
 });
 
 const users = [];
