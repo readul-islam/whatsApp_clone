@@ -5,8 +5,6 @@ const io = new Server(9000, {
   origins: ["https://magenta-froyo-758119.netlify.app/"],
 });
 
-
-
 const users = [];
 
 const addUser = (userData, socketId) => {
