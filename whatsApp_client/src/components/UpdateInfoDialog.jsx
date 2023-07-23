@@ -170,7 +170,7 @@ const UpdateInfoDialog = ({
         setCookie('user', encrypted)
       }
     } else {
-      console.log('123')
+      // console.log('123')
     }
   }
   return (

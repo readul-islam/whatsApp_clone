@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { formatDate } from '../../../utils/hooks'
 import { Auth } from '../../Messenger'
 import styled from 'styled-components'
@@ -12,7 +12,6 @@ const Wrapper = styled(Box)`
   display: flex;
   border-radius: 4px;
   word-break: break-word;
- 
 `
 
 const Own = styled(Box)`
@@ -24,7 +23,6 @@ const Own = styled(Box)`
   display: flex;
   border-radius: 4px;
   word-break: break-word;
- 
 `
 
 const Text = styled(Typography)`
@@ -50,15 +48,23 @@ const TextMessage = ({ message }) => {
 }
 
 const Message = ({ message }) => {
+  const scrollRef = useRef()
+  useEffect(() => {
+    scrollRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+      inline: 'nearest',
+    })
+  }, [message])
   return (
-    <Box sx={{px:10, py:2}}>
+    <Box ref={scrollRef} sx={{ px: 10, py: 2 }}>
       {message.sender_id === Auth.id ? (
         <Own>
-        <TextMessage message={message} />
+          <TextMessage message={message} />
         </Own>
       ) : (
         <Wrapper>
-         <TextMessage message={message} />
+          <TextMessage message={message} />
         </Wrapper>
       )}
     </Box>

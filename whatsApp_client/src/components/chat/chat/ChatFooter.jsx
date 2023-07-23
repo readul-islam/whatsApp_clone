@@ -34,7 +34,7 @@ const ClipIcon = styled(AttachFile)`
   transform: 'rotate(40deg)';
 `
 
-const ChatFooter = ({sendMessage, setMessageValue, messageValue }) => {
+const ChatFooter = ({ sendMessage, setMessageValue, messageValue }) => {
   return (
     <Container>
       <EmojiEmotions />
@@ -54,7 +54,7 @@ const ChatFooter = ({sendMessage, setMessageValue, messageValue }) => {
           inputProps={{ 'aria-label': 'search' }}
           onChange={(e) => setMessageValue(e.target.value)}
           // onKeyPress={(e) => sendMessage(e)}
-          onKeyDown={(e) =>sendMessage(e)}
+          onKeyDown={(e) => sendMessage(e)}
           value={messageValue}
         />
       </Search>

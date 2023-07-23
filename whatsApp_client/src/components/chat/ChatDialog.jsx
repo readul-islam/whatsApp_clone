@@ -49,10 +49,10 @@ const ChatDialog = () => {
 
   useEffect(() => {
     const user = decryptedData(cookies.user)
-    console.log(user)
+
     const fetchData = async () => {
       const conversation = await getMyConversation(user.id)
-      console.log(conversation)
+
       if (conversation.status === status.SUCCESS) {
         setMyConversations(conversation.data)
       }
@@ -64,8 +64,6 @@ const ChatDialog = () => {
     setAddFriend(true)
   }
   //
-
-  console.log(selectedUser, conversationId);
 
   return (
     <CustomDialog maxWidth={'md'} hideBackdrop open={true}>
@@ -81,18 +79,22 @@ const ChatDialog = () => {
         <ChatContainer>
           {selectedUser ? (
             <ChatBox
-            conversationId={conversationId}
-            selectedUser={selectedUser} />
+              myConversations={myConversations}
+              conversationId={conversationId}
+              selectedUser={selectedUser}
+            />
           ) : (
             <EmptyChat />
           )}
         </ChatContainer>
-        <AddFriendDialog
-          reload={reload}
-          setReload={setReload}
-          setAddFriend={setAddFriend}
-          addFriend={addFriend}
-        />
+        {addFriend && (
+          <AddFriendDialog
+            reload={reload}
+            setReload={setReload}
+            setAddFriend={setAddFriend}
+            addFriend={addFriend}
+          />
+        )}
       </Container>
     </CustomDialog>
   )

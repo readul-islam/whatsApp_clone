@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Conversation from './Conversation'
 import { Box, Divider, Typography, styled } from '@mui/material'
 import { isEmpty } from 'lodash'
+import { AccountContext } from '../../context/AccountProvider'
+import { Auth } from '../Messenger'
 
 // const users = [
 //   {
@@ -51,6 +53,15 @@ const Conversations = ({
   myConversations,
   setConversationId,
 }) => {
+  const { userInfo, socket, setActiveUser, SetSelectedConversation } =
+    useContext(AccountContext)
+  useEffect(() => {
+    socket.current.emit('addUser', Auth)
+    socket.current.on('getUsers', (users) => {
+      setActiveUser(users)
+      // console.log(users, 'socket')
+    })
+  }, [])
   return (
     <Container>
       {isEmpty(myConversations) ? (
@@ -61,7 +72,10 @@ const Conversations = ({
         myConversations.map((conversation) => (
           <Box
             key={conversation._id}
-            onClick={() => setConversationId(conversation._id)}
+            onClick={() => {
+              setConversationId(conversation._id)
+              SetSelectedConversation(conversation)
+            }}
           >
             <Conversation
               setSelectedUser={setSelectedUser}

@@ -3,7 +3,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import SearchIcon from '@mui/icons-material/Search'
 import VideocamIcon from '@mui/icons-material/Videocam'
 import { Avatar, Badge, Box, Typography, styled } from '@mui/material'
-import React from 'react'
+import React, { useContext } from 'react'
+import { AccountContext } from '../../../context/AccountProvider'
 
 const HeaderContainer = styled(Box)(({ theme }) => ({
   height: '44px',
@@ -80,14 +81,15 @@ const Status = styled(Typography)(({ theme }) => ({
   color: 'rgba(0,0,0,0.6)',
 }))
 
-const ChatHeader = ({selectedUser}) => {
+const ChatHeader = ({ selectedUser }) => {
+  const { activeUser } = useContext(AccountContext)
   var status = navigator.onLine ? 'online' : 'offline'
-  console.log(status)
+
   return (
     <>
       <HeaderContainer>
         <AvatarContainer>
-          {status === 'online' ? (
+          {activeUser?.find((user) => user.id === selectedUser.id) ? (
             <>
               <OnlineBadge
                 overlap='circular'

@@ -1,11 +1,10 @@
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
 import bodyParser from "body-parser";
+import cors from "cors";
 import dotenv from "dotenv";
+import express from "express";
+import helmet from "helmet";
 import dbConnection from "./database/db.js";
 import appRoute from "./routes/index.js";
-import { escape } from "./utils/hooks.js";
 
 //
 dotenv.config();
@@ -31,15 +30,16 @@ app.get('/', (req,res)=>{
   res.send({server:'on'})
 })
 //
+
 dbConnection(); 
 
 //Error handling
 app.use("*", (req, res, next) => {
+  console.log(req.path, req.url)
   const err = new Error("Route Not Found");
   err.statusCode = 404;
   next(err);
 });
-
 app.listen(port, () => {
   console.log("listening on port:", port, process.env.PORT);
 });

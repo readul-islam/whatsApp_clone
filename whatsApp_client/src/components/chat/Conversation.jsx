@@ -20,8 +20,7 @@ const Image = styled('img')(({ theme }) => ({
 const Conversation = ({ conversation, setSelectedUser }) => {
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
   console.log(conversation, 'user')
-  let auth = decryptedData(cookies.user);
-  console.log(auth,'4444444444')
+  let auth = decryptedData(cookies.user)
 
   return (
     <>

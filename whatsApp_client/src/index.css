@@ -11,3 +11,18 @@ body,
   font-weight: 500;
   /* font-family: 'Poppins', sans-serif !important; */
 }
+
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 810x !important;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-track {
+  background: hsla(0, 0%, 100%, 0.1);
+}
+
+::-webkit-scrollbar-button {
+  height: 10px !important;
+}

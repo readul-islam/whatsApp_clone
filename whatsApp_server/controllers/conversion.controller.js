@@ -29,7 +29,7 @@ export const addConversation = async (req, res, next) => {
 
 export const getConversationById = async (req, res, next) => {
   const { id } = req.query;
-  console.log(id);
+  // console.log(id,'111');
   try {
     const myConversation = await Conversation.find({
       $or: [{ "creator.id": id }, { "participant.id": id }],

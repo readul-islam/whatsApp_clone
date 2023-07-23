@@ -23,15 +23,13 @@ const Header = styled(AppBar)`
   background: #00a884;
   box-shadow: none;
 `
-export let Auth ;
+export let Auth
 const Messenger = () => {
-  const { userInfo } = useContext(AccountContext)
+  const { userInfo, socket } = useContext(AccountContext)
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const [updateInfoDialogOpen, setUpdateInfoDialogOpen] = useState(false)
 
-
   Auth = decryptedData(cookies.user)
-
 
   return (
     <>
@@ -53,10 +51,12 @@ const Messenger = () => {
             <Toolbar />
           </Header>
           <ChatDialog />
-          <UpdateInfoDialog
-            updateInfoDialogOpen={updateInfoDialogOpen}
-            setUpdateInfoDialogOpen={setUpdateInfoDialogOpen}
-          />
+          {updateInfoDialogOpen && (
+            <UpdateInfoDialog
+              updateInfoDialogOpen={updateInfoDialogOpen}
+              setUpdateInfoDialogOpen={setUpdateInfoDialogOpen}
+            />
+          )}
         </>
       )}
     </>
